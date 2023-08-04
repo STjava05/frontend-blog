@@ -8,7 +8,7 @@ export const fetchApi = createAsyncThunk(
         const token = getState().blog.token;
         console.log(token);
         try {
-            const response = await fetch(`http://localhost:5051/user?page=${page}`,
+            const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/user?page=${page}`,
                 {
                     method: "GET",
                     headers: {
@@ -42,7 +42,7 @@ export const postPost = createAsyncThunk(
         formData.append("imageRef", post.imageRef);
         formData.append("cover", post.cover);
   
-        const response = await fetch("http://localhost:5051/user/register", {
+        const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/user/register`, {
           method: "POST",
           headers: {
             Authorization: `Bearer ${token.token}`
@@ -66,7 +66,7 @@ export const postLogin = createAsyncThunk(
         
 
         try {
-            const response = await fetch("http://localhost:5051/login", {
+            const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/login`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -87,7 +87,7 @@ export const postComment = createAsyncThunk(
     async (comment, { getState }) => {
         const token = getState().blog.token;
         try {
-            const response = await fetch("http://localhost:5051/comment", {
+            const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/comment`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
