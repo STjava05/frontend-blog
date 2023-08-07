@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { postLogin } from "../reducers/apiSlice";
+import { BsGithub } from "react-icons/bs";
 
 
 
@@ -41,7 +42,7 @@ const Login = () => {
                 </Form.Group>
                 <Button variant="primary" type="submit" className="mt-3">Login</Button>
                 <Button onClick={handleLoginWithGithub} 
-            variant="secondary" type="submit" className=" mt-3 ">LoginWithGithub</Button>
+            variant="secondary" type="submit" className=" mt-3 "> <BsGithub size={30} />Github</Button>
            
             </Form>
             
