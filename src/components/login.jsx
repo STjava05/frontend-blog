@@ -31,6 +31,7 @@ const Login = () => {
 
     return (
         <Container className="new-blog-container">
+            <div className="loginBackground">
             <Form className="mt-5" onSubmit={handleSubmit}>
                 <Form.Group controlId="blog-form" className="mt-3">
                     <Form.Label>Email</Form.Label>
@@ -45,7 +46,7 @@ const Login = () => {
             variant="success" type="submit" className=" m-3 "> <BsGithub size={30} />Github</Button>
            
             </Form>
-            
+            </div>
         </Container>
 
     )
