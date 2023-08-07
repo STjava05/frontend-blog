@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 
 export const fetchApi = createAsyncThunk(
-    
+
     "api/fetchApi",
     async (page, { getState }) => {
         const token = getState().blog.token;
@@ -28,49 +28,49 @@ export const fetchApi = createAsyncThunk(
 export const postPost = createAsyncThunk(
     "api/postPost",
     async (post, { getState }) => {
-      const token = getState().blog.token;
-      try {
-        console.log(post);
-        const formData = new FormData();
-        formData.append("title", post.title);
-        formData.append("category", post.category);
-        formData.append("author.avatar", post.author.avatar);
-        formData.append("author.name", post.author.name);
-        formData.append("email", post.email);
-        formData.append("password", post.password);
-        formData.append("content", post.content);
-        formData.append("imageRef", post.imageRef);
-        formData.append("cover", post.cover);
-  
-        const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/user/register`, {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token.token}`
-          },
-          body: formData, // Utilizza formData invece di JSON.stringify(post)
-        });
-  
-        console.log(response);
-        const data = await response.json();
-        console.log(data);
-        return data;
-      } catch (error) {
-        console.log(error);
-      }
+        const token = getState().blog.token;
+        try {
+            console.log(post);
+            const formData = new FormData();
+            formData.append("title", post.title);
+            formData.append("category", post.category);
+            formData.append("author.avatar", post.author.avatar);
+            formData.append("author.name", post.author.name);
+            formData.append("email", post.email);
+            formData.append("password", post.password);
+            formData.append("content", post.content);
+            formData.append("imageRef", post.imageRef);
+            formData.append("cover", post.cover);
+
+            const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/user/register`, {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${token.token}`
+                },
+                body: formData, // Utilizza formData invece di JSON.stringify(post)
+            });
+
+            console.log(response);
+            const data = await response.json();
+            console.log(data);
+            return data;
+        } catch (error) {
+            console.log(error);
+        }
     }
-  );
-  
+);
+
 export const postLogin = createAsyncThunk(
     "api/postLogin",
     async (login) => {
-        
+
 
         try {
             const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/login`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    
+
                 },
                 body: JSON.stringify(login),
             });
@@ -103,6 +103,27 @@ export const postComment = createAsyncThunk(
     }
 );
 
+export const fetchComment = createAsyncThunk(
+    "api/fetchComment",
+    async (id, { getState }) => {
+        const token = getState().blog.token;
+        try {
+            const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/comment/${id}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token.token}`
+                },
+            });
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+);
+
+
 
 const initialState = {
     data: [],
@@ -110,9 +131,11 @@ const initialState = {
     // Se Token è null, allora token sarà un oggetto vuoto
     totalPages: 0,
     Detail: [],
+    Comment: [],
     loading: false,
     error: false,
 }
+
 const apiSlice = createSlice({
     name: "api",
     initialState,
@@ -125,11 +148,10 @@ const apiSlice = createSlice({
             state.token = {};
             localStorage.removeItem("token");
         },
-         BlogDetail: (state, action) => {
+        BlogDetail: (state, action) => {
             const find = state.data.find((post) => post._id === action.payload);
             state.Detail = find;
         },
-       
 
     },
     extraReducers: (builder) => {
@@ -164,12 +186,27 @@ const apiSlice = createSlice({
             state.loading = false;
         }
         );
+        builder.addCase(fetchComment.pending, (state, action) => {
+            state.loading = true;
+        }
+        );
+        builder.addCase(fetchComment.fulfilled, (state, action) => {
+            console.log(action.payload);
+            state.Comment = action.payload;
+            state.loading = false;
+        }
+        );
+        builder.addCase(fetchComment.rejected, (state, action) => {
+            state.error = action.payload;
+            state.loading = false;
+        }
+        );
     }
 },
 
 );
 
-export const { setAuthor, logout,BlogDetail } = apiSlice.actions;
+export const { setAuthor, logout, BlogDetail } = apiSlice.actions;
 export default apiSlice.reducer;
 
 
