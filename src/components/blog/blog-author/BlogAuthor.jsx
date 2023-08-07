@@ -1,6 +1,7 @@
 import React from "react";
 import { Col, Image, Row } from "react-bootstrap";
 import "./styles.css";
+import { BsFillHeartFill } from "react-icons/bs";
 
 
 
@@ -17,8 +18,14 @@ const BlogAuthor = props => {
       <Col>
         <div>di</div>
         <h6>{name}</h6>
-       
+          
       </Col>
+      <Col className="mt-3">
+        <i>
+        <BsFillHeartFill />
+      </i>
+      </Col>
+      
     </Row>
   );
 };

@@ -18,16 +18,12 @@ const BlogList = props => {
     console.log(currentPage);
     console.log(posts)
     dispatch(fetchApi(currentPage));
-  }, [currentPage]);
+  }, [dispatch, currentPage]);
 
   useEffect(() => {
     console.log(posts);
   }, [posts]);
-  const handlePrevious = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  }
+
   const handleNext = () => {
     if (currentPage < totalPages) {
       console.log(currentPage);
@@ -35,6 +31,13 @@ const BlogList = props => {
       setCurrentPage(currentPage + 1);
     }
   }
+
+  const handlePrevious = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  }
+  
 
   return (
 
@@ -54,6 +57,7 @@ const BlogList = props => {
 
       ))}
       <div>
+     
         <button onClick={handlePrevious} disabled={currentPage === 1} >Previous</button>
         <button onClick={handleNext} disabled={currentPage === totalPages} >Next</button>
       </div>
