@@ -1,14 +1,17 @@
 body {
   font-family: "Ubuntu", sans-serif;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 .loginBackground{
-  background-image: url("https://images.unsplash.com/photo-1517245386807-5cebbd6245b9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80");
+  background-image: url("https://img.freepik.com/free-vector/cyber-lock-security-padlock-abstract-wire-low-poly-polygonal-wire-frame-mesh-looks-like-constellation-dark-blue-night-sky-with-dots-stars-illustration-background_587448-642.jpg?w=1800&t=st=1691404637~exp=1691405237~hmac=aeafc9e70a4f20497f1266554daed520c79787f16cbf1c511d2c370c67b541bd");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   height: 100vh;
-  width: 100vw;
-  position: fixed;
+  
+ 
   z-index: -1;
 }

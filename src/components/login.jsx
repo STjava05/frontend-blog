@@ -30,9 +30,9 @@ const Login = () => {
 
 
     return (
-        <Container className="new-blog-container">
+        <Container fluid className="new-blog-container p-0 ">
             <div className="loginBackground">
-            <Form className="mt-5" onSubmit={handleSubmit}>
+            <Form className="container mt-5 pt-3" onSubmit={handleSubmit}>
                 <Form.Group controlId="blog-form" className="mt-3">
                     <Form.Label>Email</Form.Label>
                     <Form.Control size="lg" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
