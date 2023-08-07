@@ -40,9 +40,9 @@ const Login = () => {
                     <Form.Label>Password</Form.Label>
                     <Form.Control size="lg" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
                 </Form.Group>
-                <Button variant="primary" type="submit" className="mt-3">Login</Button>
+                <Button variant="primary" type="submit" className="m-5">Login</Button>
                 <Button onClick={handleLoginWithGithub} 
-            variant="secondary" type="submit" className=" mt-3 "> <BsGithub size={30} />Github</Button>
+            variant="success" type="submit" className=" m-3 "> <BsGithub size={30} />Github</Button>
            
             </Form>
             
