@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Image, Row } from "react-bootstrap";
 import "./styles.css";
-import { BsFillHeartFill } from "react-icons/bs";
+// import { BsFillHeartFill } from "react-icons/bs";
 
 
 
@@ -20,11 +20,11 @@ const BlogAuthor = props => {
         <h6>{name}</h6>
           
       </Col>
-      <Col className="mt-3">
+      {/* <Col className="mt-3">
         <i>
         <BsFillHeartFill />
       </i>
-      </Col>
+      </Col> */}
       
     </Row>
   );
