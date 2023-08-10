@@ -123,6 +123,27 @@ export const fetchComment = createAsyncThunk(
     }
 );
 
+export const deleteComment = createAsyncThunk(
+    "api/deleteComment",
+    async (id, { getState }) => {
+        const token = getState().blog.token;
+        try {
+            const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/comment/${id}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token.token}`
+                },
+            });
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+);
+
+
 
 
 const initialState = {
