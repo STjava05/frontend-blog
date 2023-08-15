@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { postLogin } from "../reducers/apiSlice";
-import { BsGithub } from "react-icons/bs";
+import { BsGithub, BsGoogle } from "react-icons/bs";
 
 
 
@@ -28,6 +28,12 @@ const Login = () => {
        window.location.href = `${process.env.REACT_APP_SERVER_BASE_URL}/auth/github`
     }
 
+    const handleLoginWithGoogle = () => {
+        window.location.href = `${process.env.REACT_APP_SERVER_BASE_URL}/auth/google`
+    }
+
+
+
 
     return (
         <Container fluid className="new-blog-container p-0 ">
@@ -44,7 +50,8 @@ const Login = () => {
                 <Button variant="primary" type="submit" className="m-5">Login</Button>
                 <Button onClick={handleLoginWithGithub} 
             variant="success" type="submit" className=" m-3 "> <BsGithub size={30} />Github</Button>
-           
+               <Button onClick={handleLoginWithGoogle}
+            variant="danger" type="submit" className=" m-3 "><BsGoogle size={30} />Google</Button>
             </Form>
             </div>
         </Container>

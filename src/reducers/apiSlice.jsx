@@ -62,7 +62,8 @@ export const postPost = createAsyncThunk(
 
 export const postLogin = createAsyncThunk(
     "api/postLogin",
-    async (login) => {
+    async (login,{getState}) => {
+        const token = getState().blog.token;
 
 
         try {
@@ -70,6 +71,9 @@ export const postLogin = createAsyncThunk(
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    Authorization: `Bearer ${token.token}`
+
+
 
                 },
                 body: JSON.stringify(login),

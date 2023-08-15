@@ -5,6 +5,7 @@ import blogReducer from './apiSlice';
 
 
 const store = configureStore({
+    
     reducer: {
         blog: blogReducer
     }
