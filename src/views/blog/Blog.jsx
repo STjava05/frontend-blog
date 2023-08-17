@@ -37,8 +37,8 @@ const Blog = () => {
             <div key={blogDetailData._id}>
               <img src={blogDetailData.cover} alt="" />
               <h1>{blogDetailData.title}</h1>
-              <h6>{blogDetailData.content}</h6>
-              <p>{blogDetailData.email}</p>
+              {blogDetailData.content}
+              {blogDetailData.email}
             </div>
 
           )}

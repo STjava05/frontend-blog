@@ -22,6 +22,7 @@ export const fetchApi = createAsyncThunk(
         } catch (error) {
             console.log(error);
         }
+    
     }
 );
 
