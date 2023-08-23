@@ -87,26 +87,26 @@ export const postLogin = createAsyncThunk(
     }
 );
 
-export const registerUser = createAsyncThunk(
-    "api/registerUser",
-    async (user, { getState }) => {
-        const token = getState().blog.token;
-        try {
-            const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/user/register`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token.token}`
-                },
-                body: JSON.stringify(user),
-            });
-            const data = await response.json();
-            return data;
-        } catch (error) {
-            console.log(error);
-        }
-    }
-);
+// export const registerUser = createAsyncThunk(
+//     "api/registerUser",
+//     async (user, { getState }) => {
+//         const token = getState().blog.token;
+//         try {
+//             const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/user/register`, {
+//                 method: "POST",
+//                 headers: {
+//                     "Content-Type": "application/json",
+//                     Authorization: `Bearer ${token.token}`
+//                 },
+//                 body: JSON.stringify(user),
+//             });
+//             const data = await response.json();
+//             return data;
+//         } catch (error) {
+//             console.log(error);
+//         }
+//     }
+// );
 
 export const postComment = createAsyncThunk(
     "api/postComment",
