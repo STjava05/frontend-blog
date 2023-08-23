@@ -3,10 +3,13 @@ import { Button, Container, Form,InputGroup } from "react-bootstrap";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useDispatch } from "react-redux";
+import { useState,useEffect } from "react";
 import { postPost } from "../../reducers/apiSlice";
 import "./styles.css";
 
-//La funzione restituisce un componente che consente all'utente di inserire i dettagli di un nuovo post del blog e inviare questi dettagli al server mediante una chiamata API per creare un nuovo post.
+
+//La funzione restituisce un componente che consente all'utente di inserire i dettagli 
+//di un nuovo post del blog e inviare questi dettagli al server mediante una chiamata API per creare un nuovo post.
 const NewBlogPost = () => {
   const textRef = useRef("");
   const imageRef = useRef(null);
@@ -18,6 +21,8 @@ const NewBlogPost = () => {
   const coverRef = useRef("");
 
   const dispatch = useDispatch();
+  const [isSumitted, setIsSubmitted] = useState(false);
+
 
   const handleChange = useCallback((value) => {
     textRef.current = value;
@@ -38,13 +43,28 @@ const NewBlogPost = () => {
         name: authorRef.current.value,
         avatar: "https://images.unsplash.com/photo-1675747158920-1b00990de2be?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
       },
-      content: textRef.current,
-      
+      content: textRef.current
+            
     };
 
 
     dispatch(postPost(postPayload));
+    setIsSubmitted(true);
   };
+
+  useEffect(() => {
+    if (isSumitted) {
+      imageRef.current.value = "";
+      titleRef.current.value = "";
+      categoryRef.current.value = "Social";
+      authorRef.current.value = "";
+      emailRef.current.value = "";
+      passwordRef.current.value = "";
+      coverRef.current.value = "";
+      textRef.current = "";
+    }
+  }, [isSumitted]);
+     
 
   return (
     <Container className="new-blog-container">

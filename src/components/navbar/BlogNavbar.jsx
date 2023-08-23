@@ -7,18 +7,23 @@ import { useDispatch } from "react-redux";
 import { logout } from "../../reducers/apiSlice";
 
 
+
+
+
 const NavBar = props => {
   const dispatch = useDispatch();
   return (
-    <Navbar expand="lg" className="blog-navbar" fixed="top">
+    <Navbar expand="lg" className="blog-navbar" fixed="">
       <Container className="justify-content-between">
         <Navbar.Brand as={Link} to="/">
           <img className="blog-navbar-brand" alt="logo" src={logo} />
         </Navbar.Brand>
-
         <Button onClick={()=> dispatch(logout())}>
           Logout
         </Button>
+        {/* <RegistrationForm />
+         */}
+       
         
 
         <Button as={Link} to="/new" className="blog-navbar-add-button bg-dark" size="lg">
@@ -33,6 +38,11 @@ const NavBar = props => {
             <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z" />
           </svg>
           Nuovo Articolo
+        </Button>
+
+        <Button as={Link} to="/registration" className="blog-navbar-add-button bg-grey" size="lg">
+          
+         registrati
         </Button>
       </Container>
     </Navbar>

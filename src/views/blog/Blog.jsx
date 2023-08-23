@@ -6,6 +6,10 @@ import { useParams } from 'react-router-dom';
 import { BlogDetail, fetchComment } from '../../reducers/apiSlice';
 import {  Col, Row } from 'react-bootstrap';
 import Comment from '../../components/comment';
+
+
+
+
 // import { use } from 'passport';
 
 const Blog = () => {
@@ -36,7 +40,7 @@ const Blog = () => {
           {blogDetailData && (
             <div key={blogDetailData._id}>
               <img src={blogDetailData.cover} alt="" />
-              <h1>{blogDetailData.title}</h1>
+              <h1>{blogDetailData.title}</h1> 
               {blogDetailData.content}
               {blogDetailData.email}
             </div>
