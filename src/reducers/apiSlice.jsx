@@ -92,7 +92,7 @@ export const registerUser = createAsyncThunk(
     async (user, { getState }) => {
         const token = getState().blog.token;
         try {
-            const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/user/register`, {
+            const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/register`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -107,6 +107,8 @@ export const registerUser = createAsyncThunk(
         }
     }
 );
+
+
 
 export const postComment = createAsyncThunk(
     "api/postComment",
