@@ -14,7 +14,9 @@ const RegistrationForm = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
+  const [dateOfBirth, setDateOfBirth] = useState('');
   const [password, setPassword] = useState('');
+  const [cover, setCover] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -22,6 +24,8 @@ const RegistrationForm = () => {
     const userData = {
       firstName,
       lastName,
+      dateOfBirth,
+      cover,
       email,
       password,
     };
@@ -34,6 +38,8 @@ const RegistrationForm = () => {
     if (isSumitted) {
       setFirstName('');
       setLastName('');
+      setDateOfBirth('');
+      setCover('');
       setEmail('');
       setPassword('');
     }
@@ -68,6 +74,23 @@ const RegistrationForm = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
         </Form.Group>
+        <Form.Group controlId="dateOfBirth">
+          <Form.Label>dateOfBirth:</Form.Label>
+          <Form.Control
+            type="date"
+            value={dateOfBirth}
+            onChange={(e) => setDateOfBirth(e.target.value)}
+          />
+        </Form.Group>
+        <Form.Group controlId="cover">
+          <Form.Label>Cover:</Form.Label>
+          <Form.Control
+            type="text"
+            value={firstName}
+            onChange={(e) => setCover(e.target.value)}
+          />
+        </Form.Group>
+        
         <Form.Group controlId="password">
           <Form.Label>Password:</Form.Label>
           <Form.Control

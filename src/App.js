@@ -22,7 +22,7 @@ function App() {
       <Router>
         <NavBar />
         <Routes>
-          <Route path="/"exact element={user && user.token ? <Home /> : <Login />}/>
+          <Route path="/"exact element={user && user.token ? <Home /> : <Login /> }/>
           <Route path="/blog/:id" element={<Blog />} />
           <Route path="/new" element={<NewBlogPost />} />
           <Route path="/registration" element={<RegistrationForm />} />

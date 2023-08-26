@@ -8,7 +8,7 @@ export const fetchApi = createAsyncThunk(
         const token = getState().blog.token;
         console.log(token);
         try {
-            const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/user?page=${page}`,
+            const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/post?page=${page}`,
                 {
                     method: "GET",
                     headers: {
@@ -31,24 +31,15 @@ export const postPost = createAsyncThunk(
     async (post, { getState }) => {
         const token = getState().blog.token;
         try {
-            console.log(post);
-            const formData = new FormData();
-            formData.append("title", post.title);
-            formData.append("category", post.category);
-            formData.append("author.avatar", post.author.avatar);
-            formData.append("author.name", post.author.name);
-            formData.append("email", post.email);
-            formData.append("password", post.password);
-            formData.append("content", post.content);
-            formData.append("imageRef", post.imageRef);
-            formData.append("cover", post.cover);
+            
 
-            const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/user/register`, {
+            const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/post`, {
                 method: "POST",
                 headers: {
+                    "Content-Type": "application/json",
                     Authorization: `Bearer ${token.token}`
                 },
-                body: formData, // Utilizza formData invece di JSON.stringify(post)
+                body:JSON.stringify (post), // Utilizza formData invece di JSON.stringify(post)
             });
 
             console.log(response);
@@ -80,6 +71,7 @@ export const postLogin = createAsyncThunk(
                 body: JSON.stringify(login),
             });
             const data = await response.json();
+            console.log(data);
             return data;
         } catch (error) {
             console.log(error);
@@ -89,16 +81,16 @@ export const postLogin = createAsyncThunk(
 
 export const registerUser = createAsyncThunk(
     "api/registerUser",
-    async (user, { getState }) => {
-        const token = getState().blog.token;
+    async (input) => {
+        // const token = getState().blog.token;
         try {
-            const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/register`, {
+            const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/author`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${token.token}`
+                    // Authorization: `Bearer ${token.token}`
                 },
-                body: JSON.stringify(user),
+                body: JSON.stringify(input),
             });
             const data = await response.json();
             return data;
@@ -176,11 +168,12 @@ export const deleteComment = createAsyncThunk(
 
 const initialState = {
     data: [],
-    token: localStorage.getItem("token") || "",
+    token: localStorage.getItem("token") || null,
     // Se Token è null, allora token sarà un oggetto vuoto
     totalPages: 0,
     Detail: [],
     Comment: [],
+    posts: [],  
     loading: false,
     error: false,
 }
@@ -209,10 +202,14 @@ const apiSlice = createSlice({
         }
         );
         builder.addCase(postLogin.fulfilled, (state, action) => {
-            localStorage.setItem("token", action.payload.token);
-            state.token = action.payload;
+            if (action.payload) { // Verifica se action.payload è definito
+                console.log(action.payload);
+                state.token = action.payload;
+                localStorage.setItem("token", action.payload.token);
+            }
             state.loading = false;
         }
+
         );
         builder.addCase(postLogin.rejected, (state, action) => {
             state.error = action.payload;
@@ -225,7 +222,7 @@ const apiSlice = createSlice({
         );
         builder.addCase(fetchApi.fulfilled, (state, action) => {
             console.log(action.payload);
-            state.data = action.payload.user;
+            state.posts = action.payload;
             state.totalPages = action.payload.totalPages;
             state.loading = false;
         }
