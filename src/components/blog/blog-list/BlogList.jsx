@@ -107,7 +107,7 @@ console.log(posts)
   return (
     
     <Row>
-      {posts && posts?.posts.map((post, i) => (
+      {posts && posts.posts && posts.posts.map((post, i) => (
         <Col
           key={`item-${i}`}
           md={4}

@@ -30,10 +30,10 @@ export const postPost = createAsyncThunk(
     "api/postPost",
     async (post, { getState }) => {
         const token = getState().blog.token;
-        try {
-            
+        
 
-            const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/post`, {
+        try {
+             const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/post`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
