@@ -71,8 +71,9 @@
 import React, { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchApi } from "../../../reducers/apiSlice";
+import { editPost,deletePost, fetchApi } from "../../../reducers/apiSlice";
 import BlogItem from "../blog-item/BlogItem";
+
 
 const BlogList = () => {
   const dispatch = useDispatch();
@@ -98,10 +99,17 @@ const BlogList = () => {
 
   const handleDelete = (postId) => {
     // Implementa l'azione di eliminazione
+   dispatch(deletePost(postId))
+
+    
+  
   };
 
   const handleEdit = (postId) => {
     // Implementa l'azione di modifica
+    dispatch(editPost(postId))
+
+   
   };
 console.log(posts)
   return (

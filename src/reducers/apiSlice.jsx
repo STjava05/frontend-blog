@@ -22,7 +22,7 @@ export const fetchApi = createAsyncThunk(
         } catch (error) {
             console.log(error);
         }
-    
+
     }
 );
 
@@ -30,16 +30,16 @@ export const postPost = createAsyncThunk(
     "api/postPost",
     async (post, { getState }) => {
         const token = getState().blog.token;
-        
+
 
         try {
-             const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/post`, {
+            const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/post`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token.token}`
                 },
-                body:JSON.stringify (post), // Utilizza formData invece di JSON.stringify(post)
+                body: JSON.stringify(post), // Utilizza formData invece di JSON.stringify(post)
             });
 
             console.log(response);
@@ -54,7 +54,7 @@ export const postPost = createAsyncThunk(
 
 export const postLogin = createAsyncThunk(
     "api/postLogin",
-    async (login,{getState}) => {
+    async (login, { getState }) => {
         const token = getState().blog.token;
 
 
@@ -163,17 +163,52 @@ export const deleteComment = createAsyncThunk(
     }
 );
 
+export const fetchBlogDetail = createAsyncThunk(
+    "api/fetchBlogDetail",
+    async (postId) => {
+        const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/post/${postId}`);
+        const data = await response.json();
+        return data;
+    }
+);
 
+export const editPost = createAsyncThunk(
+    "api/editPost",
+    async (postId, post) => {
+        const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/post/${postId}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(post),
+        });
+        const data = await response.json();
+        return data;
+    }
+);
 
+export const deletePost = createAsyncThunk(
+    "api/deletePost",
+    async (postId) => {
+        const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/post/${postId}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+        const data = await response.json();
+        return data;
+    }
+);
 
 const initialState = {
     data: [],
     token: localStorage.getItem("token") || null,
     // Se Token è null, allora token sarà un oggetto vuoto
     totalPages: 0,
-    Detail: [],
+    Detail: null,
     Comment: [],
-    posts: [],  
+    posts: [],
     loading: false,
     error: false,
 }
@@ -243,6 +278,20 @@ const apiSlice = createSlice({
         }
         );
         builder.addCase(fetchComment.rejected, (state, action) => {
+            state.error = action.payload;
+            state.loading = false;
+        }
+        );
+        builder.addCase(fetchBlogDetail.pending, (state, action) => {
+            state.loading = true;
+        }
+        );
+        builder.addCase(fetchBlogDetail.fulfilled, (state, action) => {
+            state.Detail = action.payload;
+            state.loading = false;
+        }
+        );
+        builder.addCase(fetchBlogDetail.rejected, (state, action) => {
             state.error = action.payload;
             state.loading = false;
         }

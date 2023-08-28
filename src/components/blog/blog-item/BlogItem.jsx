@@ -25,13 +25,13 @@
 // export default BlogItem;
 
 import React from "react";
-import { Card, Button } from "react-bootstrap";
+import { Card} from "react-bootstrap";
 import { Link } from "react-router-dom";
 import BlogAuthor from "../blog-author/BlogAuthor";
 import "./styles.css";
 
 const BlogItem = (props) => {
-  const { title, cover, author, _id, onDelete, onEdit } = props;
+  const { title, cover, author, _id } = props;
 
   return (
     <Link to={`/blog/${_id}`} className="blog-link">

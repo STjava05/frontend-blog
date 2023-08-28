@@ -11,24 +11,21 @@ import Success from "./components/success";
 import RegistrationForm from "./components/registrationForm";
 
 
+
 function App() {
   const user = useSelector((state) => state.blog.token);
 
- 
-
-  return (
+ return (
     <div>
-     
-      <Router>
+     <Router>
         <NavBar />
         <Routes>
           <Route path="/"exact element={user && user.token ? <Home /> : <Login /> }/>
           <Route path="/blog/:id" element={<Blog />} />
+          <Route path="/posts/:id/edit" element={<Blog />} />
           <Route path="/new" element={<NewBlogPost />} />
           <Route path="/registration" element={<RegistrationForm />} />
           <Route path="/success" element={<Success />} />
-          
-          
         </Routes>
         <Footer />
       </Router>
