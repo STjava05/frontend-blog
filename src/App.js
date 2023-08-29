@@ -9,6 +9,7 @@ import Home from "./views/home/Home";
 import NewBlogPost from "./views/new/New";
 import Success from "./components/success";
 import RegistrationForm from "./components/registrationForm";
+import Edit from "./views/home/Edit";
 
 
 
@@ -22,7 +23,7 @@ function App() {
         <Routes>
           <Route path="/"exact element={user && user.token ? <Home /> : <Login /> }/>
           <Route path="/blog/:id" element={<Blog />} />
-          <Route path="/posts/:id/edit" element={<Blog />} />
+          <Route path="/posts/:id/edit" element={<Edit />} />
           <Route path="/new" element={<NewBlogPost />} />
           <Route path="/registration" element={<RegistrationForm />} />
           <Route path="/success" element={<Success />} />

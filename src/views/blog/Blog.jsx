@@ -77,26 +77,3 @@ export default Blog;
 
 
 
-//   <Button variant="danger" onClick={onDelete}>Elimina</Button>
-//    <Button variant="primary" onClick={onEdit}>Modifica</Button> 
-
-//  )} 
-
-
-
-
-  //  <Col md={4}>
-  //       {blogCommentData && (
-  //         <div key={blogCommentData._id}>
-  //           <h1>Commenti</h1>
-  //           <h6>{blogCommentData.content}</h6>
-  //           <p>{blogCommentData.author}</p>
-  //           <p>{blogCommentData.rate}</p>
-            
-            
-           
-  //         </div>
-  //       )}
-  //       <Comment />
-        
-  //       </Col> 

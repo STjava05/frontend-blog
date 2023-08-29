@@ -116,7 +116,7 @@ console.log(posts)
     
     <Row>
       {posts && posts.posts && posts.posts.map((post, i) => (
-        <Col
+        <Col className="select"
           key={`item-${i}`}
           md={4}
           style={{

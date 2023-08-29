@@ -82,13 +82,13 @@ export const postLogin = createAsyncThunk(
 export const registerUser = createAsyncThunk(
     "api/registerUser",
     async (input) => {
-        // const token = getState().blog.token;
+        
         try {
             const response = await fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/author`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    // Authorization: `Bearer ${token.token}`
+                    
                 },
                 body: JSON.stringify(input),
             });
